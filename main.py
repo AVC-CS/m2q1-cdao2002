@@ -7,13 +7,21 @@ def getPivot(number):
     pivot_idx = 0
     best_dist = abs(number[0] - avg)
     
+    for i, x in enumerate(number):
+        d = abs(x - avg)
+        if d < best_dist or (d == best_dist and i > pivot_idx):
+            pivot_idx = i
+    return pivot_idx
 
 def split(number):
-    """
-    ########################################
-    Code Your Program here
-    ########################################
-    """
+
+    idx = getPivot(number)
+    pivot = number[idx]
+
+    left  = [x for i, x in enumerate(number) if i != idx and x <= pivot]
+    right = [x for i, x in enumerate(number) if i != idx and x > pivot]
+
+    return left + [pivot] + right
 
 
 def main():
